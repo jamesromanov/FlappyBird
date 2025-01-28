@@ -37,7 +37,8 @@
 }
 .flappyBird {
   position: absolute;
+  user-select: none;
 }
 .flappyBird img {
-  width: 250px;
+  width: 70px;
 }
