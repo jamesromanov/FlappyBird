@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  margin-top: 17px;
+  width: 450px;
+  height: 700px;
+  background-color: rgb(88, 59, 59);
+  background: url(./mainBackground/flappy-bird-bg.png);
+  background-size: 1100px;
+  background-repeat: no-repeat;
+}
+.imgMoving {
+  margin-top: 559px;
+}
+.imgMoving img {
+  width: 240px;
+}
+.imgMoving {
+  background: url(./movingBackground/movingone.png) repeat-x;
+  background-position: 0;
+  width: 240px;
+  background-size: cover;
+  padding-left: 209px;
+  padding-top: 52px;
+
+  animation: movingB 4s linear infinite;
+}
+@keyframes movingB {
+  to {
+    background-position: -1000px;
+  }
+}
+.flappyBird {
+  position: absolute;
+}
+.flappyBird img {
+  width: 250px;
+}
