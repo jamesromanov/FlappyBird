@@ -22,5 +22,4 @@ let goUp = () => {
     event.preventDefault();
   });
 };
-
 goUp();

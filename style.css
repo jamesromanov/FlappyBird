@@ -40,5 +40,37 @@
   user-select: none;
 }
 .flappyBird img {
-  width: 70px;
+  width: 60px;
+}
+.pipes {
+  position: absolute;
+  display: flex;
+  align-self: flex-end;
+  background-size: cover;
+  width: 100%;
+  width: 1081px;
+  margin-bottom: 142px;
+  background-image: repeat-x;
+}
+
+.pipe1 {
+  display: flex;
+  width: 80px;
+  align-self: flex-start;
+  position: absolute;
+}
+.pipe2 {
+  display: flex;
+  width: 80px;
+  align-self: flex-start;
+  position: absolute;
+}
+.pipe3 {
+  display: flex;
+  width: 80px;
+
+  align-self: flex-end;
+  transform: rotate(180deg);
+  position: absolute;
+  z-index: -0;
 }
