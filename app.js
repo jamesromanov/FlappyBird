@@ -7,6 +7,8 @@ let stopM = flappyBird.getBoundingClientRect();
 let container = con.getBoundingClientRect();
 let start = document.querySelector("h1");
 let pipe = document.querySelector(".pipes");
+let h2 = document.querySelector("h2");
+let button = document.querySelector(".start");
 let s = 3;
 setInterval(() => {
   if (s == 0) {
@@ -75,6 +77,11 @@ setTimeout(() => {
         stopM.bottom > container.bottom ||
         stopM.top < container.top
       ) {
+        h2.style.boxShadow =
+          "   -10px 0 0 0 green, 10px 0 0 0 green, 0 -10px 0 0 green, 0 10px 0 0 green";
+        h2.style.border = "6px solid green";
+        h2.textContent = `Game over!`;
+        h2.style.padding = "20px";
         return;
       } else {
         n += 350;
@@ -98,6 +105,12 @@ setTimeout(() => {
           stopM.bottom > container.bottom ||
           stopM.top < container.top
         ) {
+          h2.style.boxShadow =
+            "   -10px 0 0 0 green, 10px 0 0 0 green, 0 -10px 0 0 green, 0 10px 0 0 green";
+          h2.style.border = "6px solid green";
+          h2.textContent = `Game over!`;
+          h2.style.padding = "20px";
+
           return;
         } else {
           n += 350;
@@ -107,6 +120,3 @@ setTimeout(() => {
   }
   spaceJ();
 }, 4000);
-
-let pipe1 = document.createElement("img");
-pipe1.setAttribute("src", "./pipe/pipe1.png");
