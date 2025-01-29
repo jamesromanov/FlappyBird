@@ -5,6 +5,16 @@
   justify-content: center;
   align-items: center;
 }
+.start {
+  background-color: white;
+  color: black;
+  z-index: 3;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-family: sans-serif;
+  align-items: center;
+}
 .container {
   position: relative;
   margin-top: 17px;
@@ -47,26 +57,43 @@
 }
 .pipes {
   position: absolute;
-  width: 500px;
+  width: 900px;
   height: 100vh;
-
-  background: url(./pipe/pipssssaas.png) repeat-x;
-  background-position: 0;
-  margin-bottom: 139px;
-  background-size: 982px;
-  animation: movingB 4s linear infinite;
+  margin-bottom: 140px;
+  background: url(./pipe/llll.png) repeat-x;
+  background-size: 3800px;
+  animation: moving 11s linear infinite;
 }
-@keyframes movingB {
+
+@keyframes moving {
+  from {
+    background-position: 0;
+  }
   to {
-    background-position: -1000px;
+    background-position: -3800px;
   }
 }
+
 .counter {
   position: absolute;
   z-index: 1;
-
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   align-self: flex-start;
   color: white;
   margin-left: 423px;
+}
+.d1 {
+  background-color: blueviolet;
+  position: absolute;
+  z-index: 0;
+
+  padding: 24px 10px;
+}
+.d2 {
+  background-color: rgb(67, 40, 92);
+  position: absolute;
+  z-index: 0;
+  display: flex;
+
+  padding: 24px 10px;
 }

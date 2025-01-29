@@ -5,60 +5,64 @@ let movinBg = document.querySelector(".movingBackground");
 let stopC = con.getBoundingClientRect();
 let stopM = flappyBird.getBoundingClientRect();
 let container = con.getBoundingClientRect();
-
-console.log(movinBg.children);
-let counter = document.querySelector(".counter");
-l = 0;
+let start = document.querySelector("h1");
+let pipe = document.querySelector(".pipes");
+let s = 3;
 setInterval(() => {
-  counter.style.padding = "12px 16px";
-  counter.style.backgroundColor = "red";
-  counter.innerHTML = l;
-  l++;
-}, 1000);
+  if (s == 0) {
+    start.textContent = "";
+    start.style.padding = "0px";
+    start.style.border = "none";
 
-n = 30;
+    clearInterval(sett);
+  }
 
-start = 0;
-fallDown = () => {
-  let setT = setInterval(() => {
-    flappyBird.style.marginBottom = `${n}px`;
-    if (stopM.bottom > container.bottom) {
-      clearInterval(setT);
-    }
-    n -= 4;
-  }, 6);
-};
-console.log([...movinBg.children][0] == flappyBird);
+  start.style.boxShadow =
+    "   -10px 0 0 0 green,10px 0 0 0 green,0 -10px 0 0 green,0 10px 0 0 green";
+  start.style.border = "6px solid green";
+  start.textContent = `Starting in ${s}`;
+  start.style.padding = "20px";
 
-fallDown();
+  s--;
+}, 900);
 
-let goUp = () => {
-  con.addEventListener("click", (event) => {
-    event.preventDefault();
+setTimeout(() => {
+  console.log(movinBg.children);
+  let counter = document.querySelector(".counter");
+  l = 0;
+  setInterval(() => {
+    counter.style.padding = "12px 16px";
+    counter.style.backgroundColor = "red";
+    counter.innerHTML = l;
+    l++;
+  }, 1000);
 
-    flappyBird.style.marginBottom = `${n}px`;
-    flappyBird.style.transition = "0.19s";
+  n = 30;
 
-    let stopM = flappyBird.getBoundingClientRect();
-    let container = con.getBoundingClientRect();
+  start = 0;
+  fallDown = () => {
+    let setT = setInterval(() => {
+      flappyBird.style.marginBottom = `${n}px`;
+      if (
+        stopM.left < container.left ||
+        stopM.right > container.right ||
+        stopM.bottom > container.bottom ||
+        stopM.top < container.top
+      ) {
+        return;
+      } else {
+        n -= 4;
+      }
+    }, 6);
+  };
+  console.log([...movinBg.children][0] == flappyBird);
 
-    if (
-      stopM.left < container.left ||
-      stopM.right > container.right ||
-      stopM.bottom > container.bottom ||
-      stopM.top < container.top
-    ) {
-      return;
-    } else {
-      n += 350;
-    }
-  });
-};
-goUp();
-function spaceJ() {
-  document.addEventListener("keydown", (event) => {
-    if (event.code === "Space") {
+  fallDown();
+
+  let goUp = () => {
+    con.addEventListener("click", (event) => {
       event.preventDefault();
+
       flappyBird.style.marginBottom = `${n}px`;
       flappyBird.style.transition = "0.19s";
 
@@ -75,7 +79,34 @@ function spaceJ() {
       } else {
         n += 350;
       }
-    }
-  });
-}
-spaceJ();
+    });
+  };
+  goUp();
+  function spaceJ() {
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "Space") {
+        event.preventDefault();
+        flappyBird.style.marginBottom = `${n}px`;
+        flappyBird.style.transition = "0.19s";
+
+        let stopM = flappyBird.getBoundingClientRect();
+        let container = con.getBoundingClientRect();
+
+        if (
+          stopM.left < container.left ||
+          stopM.right > container.right ||
+          stopM.bottom > container.bottom ||
+          stopM.top < container.top
+        ) {
+          return;
+        } else {
+          n += 350;
+        }
+      }
+    });
+  }
+  spaceJ();
+}, 4000);
+
+let pipe1 = document.createElement("img");
+pipe1.setAttribute("src", "./pipe/pipe1.png");

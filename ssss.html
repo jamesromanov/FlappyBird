@@ -3,98 +3,87 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Collision Detection</title>
+    <title>Flappy Bird</title>
     <style>
-      .main {
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: skyblue;
+      }
+      .game-container {
         position: relative;
         width: 400px;
-        height: 300px;
-        border: 3px solid black;
+        height: 600px;
         overflow: hidden;
-        padding: 20px; /* Padding dinamik o‘zgarishi mumkin */
+        border: 2px solid black;
+        background: url("https://i.imgur.com/3spCDoH.png") repeat-x;
       }
-
-      .moving {
+      .bird {
         position: absolute;
-        width: 50px;
-        height: 50px;
-        background-color: red;
-        cursor: grab;
+        width: 40px;
+        height: 40px;
+        background: yellow;
+        border-radius: 50%;
+        top: 50%;
+        left: 50px;
       }
-
-      .obstacle {
+      .pipe {
         position: absolute;
-        width: 100px;
-        height: 100px;
-        background-color: blue;
-        top: 120px;
-        left: 120px;
+        width: 60px;
+        height: 200px;
+        background: green;
+      }
+      .pipe.top {
+        top: 0;
+      }
+      .pipe.bottom {
+        bottom: 0;
+      }
+      .score {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        font-family: Arial, sans-serif;
       }
     </style>
   </head>
   <body>
-    <div class="main" id="main">
-      <div class="moving" id="moving"></div>
-      <div class="obstacle" id="obstacle"></div>
+    <div class="game-container">
+      <div class="bird"></div>
+      <div class="score">0</div>
     </div>
-
     <script>
-      const moving = document.getElementById("moving");
-      const obstacle = document.getElementById("obstacle");
-      const main = document.getElementById("main");
+      const bird = document.querySelector(".bird");
+      const gameContainer = document.querySelector(".game-container");
+      const scoreDisplay = document.querySelector(".score");
+      let birdY = 200;
+      let gravity = 2;
+      let velocity = 0;
+      let score = 0;
 
-      let isDragging = false;
-      let offsetX, offsetY;
-
-      moving.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        offsetX = e.clientX - moving.offsetLeft;
-        offsetY = e.clientY - moving.offsetTop;
-      });
-
-      document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-
-        let newX = e.clientX - offsetX;
-        let newY = e.clientY - offsetY;
-
-        // Dinamik paddingni hisobga olish
-        const mainStyles = window.getComputedStyle(main);
-        const paddingX = parseInt(mainStyles.paddingLeft);
-        const paddingY = parseInt(mainStyles.paddingTop);
-
-        const maxX = main.clientWidth - moving.clientWidth - paddingX;
-        const maxY = main.clientHeight - moving.clientHeight - paddingY;
-
-        // Elementni chegarada ushlab turish
-        newX = Math.max(paddingX, Math.min(newX, maxX));
-        newY = Math.max(paddingY, Math.min(newY, maxY));
-
-        moving.style.left = newX + "px";
-        moving.style.top = newY + "px";
-
-        // To‘qnashuvni tekshirish
-        if (isColliding(moving, obstacle)) {
-          isDragging = false; // Agar urilsa harakat to‘xtaydi
-        }
-      });
-
-      document.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-
-      // To‘qnashuvni aniqlash funksiyasi
-      function isColliding(el1, el2) {
-        const rect1 = el1.getBoundingClientRect();
-        const rect2 = el2.getBoundingClientRect();
-
-        return !(
-          rect1.right < rect2.left ||
-          rect1.left > rect2.right ||
-          rect1.bottom < rect2.top ||
-          rect1.top > rect2.bottom
-        );
+      function jump() {
+        velocity = -10;
       }
+      document.addEventListener("keydown", jump);
+
+      function gameLoop() {
+        velocity += gravity;
+        birdY += velocity;
+        bird.style.top = birdY + "px";
+
+        if (birdY > 560 || birdY < 0) location.reload();
+        requestAnimationFrame(gameLoop);
+      }
+      gameLoop();
     </script>
   </body>
 </html>
